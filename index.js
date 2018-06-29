@@ -15,37 +15,27 @@ setTimeout(function(){
     if(labelText.includes('agree')){
       checkbox.checked = true;
       operations.push({
-        checkbox: checkbox,
+        checkboxId: checkbox.id,
         text: labelText,
-        action: 'checked'
+        action: 'checked',
+        category: 'marketing'
       });
     }
-    console.log('got text for checkbox', checkbox.id, ': ', labelText)
   })
-  if(operations.length){
-    var numChecked = 0;
-    var numUnchecked = 0;
-    operations.forEach(function(operation){
-      if(operation.action === 'checked'){
-        numChecked += 1;
-      } else {
-        numUnchecked += 1;
-      }
-    })
-    chrome.runtime.sendMessage({
-      operations: operations
-      // type: 'list',
-      // iconUrl: 'https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png',
-      // title: 'Spam was blocked!',
-      // message: 'Unchecker was able to uncheck '+numUnchecked+' and check '+numChecked+' marketing related checkboxes to prevent you from receving marketing sms and emails.',
-      // items: operations.map(function(operation){
-      //   return {
-      //     title: operation.checkbox.id+' ('+operation.action+')',
-      //     message: 'this text was identified as marketing related: '+'"'+operation.text+'". The checkbox has been '+operation.action
-      //   }
-      // })
-    })
-  }
+
+  chrome.runtime.sendMessage({
+    operations: operations
+    // type: 'list',
+    // iconUrl: 'https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png',
+    // title: 'Spam was blocked!',
+    // message: 'Unchecker was able to uncheck '+numUnchecked+' and check '+numChecked+' marketing related checkboxes to prevent you from receving marketing sms and emails.',
+    // items: operations.map(function(operation){
+    //   return {
+    //     title: operation.checkbox.id+' ('+operation.action+')',
+    //     message: 'this text was identified as marketing related: '+'"'+operation.text+'". The checkbox has been '+operation.action
+    //   }
+    // })
+  })
 }, 2000)
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
