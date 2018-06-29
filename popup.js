@@ -39,7 +39,10 @@ function generateCheckboxInfo(operations){
   }
 }
 
-chrome.storage.sync.get(['operations'], function(data){
-  generateHeader(data.operations);
-  generateCheckboxInfo(data.operations);
-})
+chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+  var url = tabs[0].url;
+  chrome.storage.sync.get([url], function(data){
+    generateHeader(data[url]);
+    generateCheckboxInfo(data[url]);
+  })
+});

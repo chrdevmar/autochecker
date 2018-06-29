@@ -1,14 +1,17 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-  chrome.browserAction.setBadgeText({text: request.operations.length.toString()})
-  chrome.storage.sync.set({'operations': request.operations})
+
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    chrome.browserAction.setBadgeText({
+      text: request.operations.length.toString(),
+      tabId: tabs[0].id
+    });
+    chrome.storage.sync.set({[sender.url]: request.operations})
+    setTimeout(function(){
+      chrome.storage.sync.remove(sender.url)
+    }, 120000)
+  })
 })
 
 chrome.browserAction.setPopup({
   popup: 'popup.html'
 })
-
-// chrome.browserAction.onClicked.addListener(function(tab){
-//   chrome.storage.sync.get(['operations'], function(data){
-//     console.log('GOT THE DATA:', data);
-//   })
-// })

@@ -9,12 +9,15 @@ setTimeout(function(){
     var labelText = '';
     // try finding a label with a 'for' attribute of this checkbox
     var label = document.querySelector('label[for="'+checkbox.id+'"]');
-    if(label){
-      var labelText = label.innerText
+    if(checkbox.labels.length){
+      // great, the html is made properly and the label has the text in it
+      labelText = checkbox.labels[0].innerText
+    } else {
+      // search sibling elements
+      
     }
-    if(labelText){
 
-    }
+
     var operation = determineOperation(labelText);
     checkbox.checked = operation.checked;
 
@@ -31,12 +34,12 @@ setTimeout(function(){
     })
   })
 
-
-
   chrome.runtime.sendMessage({
     operations: operations
   })
 }, 2000)
+
+
 /*
 recieves label text and attempts to decide whether checkbox
 should be checked or unchecked, as well as what category the checkbox is

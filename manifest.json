@@ -1,7 +1,7 @@
 {
-  "name": "Unchecker",
+  "name": "Autochecker",
   "version": "0.1",
-  "description": "Automatically check/uncheck form inputs such that you don't get signed up for marketing spam.",
+  "description": "Automatically check/uncheck form inputs. Autochecker will categorise the text associated with checkboxes found on the page and attempt to avoid marketing spam while accepting terms and conditions automatically.",
   "manifest_version": 2,
   "permissions": [
     "activeTab",
@@ -18,8 +18,15 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "run_at": "document_end",
+      "run_at": "document_idle",
       "js": ["index.js"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "64": "icon-64.png",
+    "128": "icon-128.png"
+  }
 }
