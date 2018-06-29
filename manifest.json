@@ -1,0 +1,25 @@
+{
+  "name": "Unchecker",
+  "version": "0.1",
+  "description": "Automatically check/uncheck form inputs such that you don't get signed up for marketing spam.",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "notificationListener.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_end",
+      "js": ["index.js"]
+    }
+  ]
+}
