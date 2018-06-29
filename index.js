@@ -12,32 +12,87 @@ setTimeout(function(){
     if(label){
       var labelText = label.innerText
     }
-    if(labelText.includes('agree')){
-      checkbox.checked = true;
-      operations.push({
-        checkboxId: checkbox.id,
-        text: labelText,
-        action: 'checked',
-        category: 'marketing'
-      });
+    if(labelText){
+
     }
+    var operation = determineOperation(labelText);
+    checkbox.checked = operation.checked;
+
+    if(operation.action === 'checked'){
+      checkbox.checked = true;
+    } else if(operation.action === 'unchecked'){
+      checkbox.checked = false;
+    }
+    operations.push({
+      checkboxId: checkbox.id,
+      text: labelText,
+      action: operation.action,
+      category: operation.category
+    })
   })
+
+
 
   chrome.runtime.sendMessage({
     operations: operations
-    // type: 'list',
-    // iconUrl: 'https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png',
-    // title: 'Spam was blocked!',
-    // message: 'Unchecker was able to uncheck '+numUnchecked+' and check '+numChecked+' marketing related checkboxes to prevent you from receving marketing sms and emails.',
-    // items: operations.map(function(operation){
-    //   return {
-    //     title: operation.checkbox.id+' ('+operation.action+')',
-    //     message: 'this text was identified as marketing related: '+'"'+operation.text+'". The checkbox has been '+operation.action
-    //   }
-    // })
   })
 }, 2000)
+/*
+recieves label text and attempts to decide whether checkbox
+should be checked or unchecked, as well as what category the checkbox is
+returns an object structured like so:
+{
+  action: ('checked', 'unchecked', 'ignored'),
+  category: ('marketing', 'terms and conditions', 'unknown')
+}
+*/
+function determineOperation(text){
+  // try to determine if the text is opt-out
+  var isOptOut = (
+    text.includes('do not') ||
+    text.includes('don\'t') ||
+    text.includes('Do not') ||
+    text.includes('Don\'t')
+  );
+  var action = '';
+  var category = '';
+  if(isTermsAndConditions(text)){
+    action = 'checked';
+    category = 'terms and conditions';
+    if(isOptOut){
+      action = 'unchecked';
+    }
+    return {
+      action: action,
+      category: category
+    }
+  } else if(isMarketingRelated(text)) {
+    action = 'unchecked';
+    category = 'marketing';
+    if(isOptOut){
+      action = 'checked';
+    }
+    return {
+      action: action,
+      category: category
+    }
+  } else {
+    return {
+      action: 'ignored',
+      category: 'unknown'
+    }
+  }
+}
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
-  console.log('GOT A MESSAGE', request)
-})
+function isTermsAndConditions(text){
+  return text.includes('agree') ||
+    text.includes('terms') ||
+    text.includes('policy')
+}
+
+function isMarketingRelated(text){
+  return text.includes('marketing') ||
+  text.includes('receive') ||
+  text.includes('send me') ||
+  text.includes('email')
+}
