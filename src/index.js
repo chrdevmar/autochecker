@@ -12,8 +12,6 @@ function determineOperation(text){
   var isOptOut = (
     text.includes('do not') ||
     text.includes('don\'t') ||
-    text.includes('Do not') ||
-    text.includes('Don\'t')
   );
   var action = '';
   var category = '';
