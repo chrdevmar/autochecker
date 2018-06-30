@@ -35,7 +35,7 @@ setTimeout(function(){
   chrome.runtime.sendMessage({
     operations: operations
   })
-}, 2000)
+}, 3000)
 
 
 /*
