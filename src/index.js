@@ -80,7 +80,7 @@ function determineOperation(text){
   } else {
     return {
       action: 'ignored',
-      category: 'unknown'
+      category: 'unrelated/unknown'
     }
   }
 }
