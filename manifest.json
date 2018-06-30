@@ -1,7 +1,7 @@
 {
   "name": "Autochecker Checkbox Manager",
-  "version": "0.1.4",
-  "description": "Autochecker will analyze checkboxes on the page, attempting to avoid marketing spam and automatically accept terms and conditions.",
+  "version": "0.1.7",
+  "description": "Autochecker will analyse checkboxes on the page, attempting to avoid marketing spam and automatically accept terms and conditions.",
   "manifest_version": 2,
   "permissions": [
     "activeTab",

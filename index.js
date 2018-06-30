@@ -17,9 +17,7 @@ setTimeout(function(){
 
     }
 
-
     var operation = determineOperation(labelText);
-    checkbox.checked = operation.checked;
 
     if(operation.action === 'checked'){
       checkbox.checked = true;
@@ -89,15 +87,21 @@ function determineOperation(text){
 
 function isTermsAndConditions(text){
   return text.includes('terms') ||
+    text.includes('Terms') ||
     text.includes('policy') ||
-    text.includes('privacy')
+    text.includes('Policy') ||
+    text.includes('privacy') ||
+    text.includes('Privacy')
 }
 
 function isMarketingRelated(text){
   return text.includes('marketing') ||
+  text.includes('Marketing') ||
   text.includes('receive') ||
+  text.includes('Receive') ||
   text.includes('send me') ||
+  text.includes('Send me') ||
   text.includes('email') ||
   text.includes('news') ||
-  text.includes('updates') ||
+  text.includes('updates')
 }
