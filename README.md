@@ -4,8 +4,6 @@ This is a google chrome extension that attempts to automatically opt out of mark
 
 It also automatically accepts terms and conditions where possible.
 
-#### Deploying
+#### Developing Locally
 
-Before deploying, be sure to update the version number in manifest.json
-
-To build for google chrome extension store, run 'npm run build'. This will prepare the dist folder for uploading. Simply compress the dist folder and upload it through the chrome developer dashboard.
+All source code files are in /src. Run 'npm run build' to build the dist folder, then just load the entire folder as an unpacked extension. [See how to load unpacked extensions here.](https://developer.chrome.com/extensions/getstarted)
