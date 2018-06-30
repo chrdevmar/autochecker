@@ -47,27 +47,17 @@ function determineOperation(text){
 
 function isTermsAndConditions(text){
   return text.includes('terms') ||
-  text.includes('Terms') ||
   text.includes('policy') ||
-  text.includes('Policy') ||
-  text.includes('privacy') ||
-  text.includes('Privacy')
+  text.includes('privacy')
 }
 
 function isMarketingRelated(text){
   return text.includes('marketing') ||
-  text.includes('Marketing') ||
   text.includes('receive') ||
-  text.includes('Receive') ||
   text.includes('send me') ||
-  text.includes('Send me') ||
   text.includes('email') ||
-  text.includes('Email') ||
   text.includes('sms') ||
-  text.includes('SMS') ||
   text.includes('news') ||
-  text.includes('News') ||
-  text.includes('Updates') ||
   text.includes('updates')
 }
 
@@ -92,7 +82,7 @@ setTimeout(() => {
       }
     }
 
-    const operation = determineOperation(labelText);
+    const operation = determineOperation(labelText.toLowerCase());
 
     if(operation.action === 'checked'){
       checkbox.checked = true;
