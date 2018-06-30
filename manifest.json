@@ -1,7 +1,7 @@
 {
   "name": "Autochecker Checkbox Manager",
-  "version": "0.1.7",
-  "description": "Autochecker will analyse checkboxes on the page, attempting to avoid marketing spam and automatically accept terms and conditions.",
+  "version": "1.0.0",
+  "description": "Autochecker attempts to avoid marketing spam and automatically accepts terms and conditions when filling out forms.",
   "manifest_version": 2,
   "permissions": [
     "activeTab",
@@ -11,7 +11,7 @@
   "browser_action": {},
   "background": {
     "scripts": [
-      "notificationListener.js"
+      "./dist/notificationListener.js"
     ],
     "persistent": true
   },
@@ -19,7 +19,7 @@
     {
       "matches": ["<all_urls>"],
       "run_at": "document_idle",
-      "js": ["index.js"]
+      "js": ["./dist/index.js"]
     }
   ],
   "icons": {

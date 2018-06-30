@@ -1,0 +1,24 @@
+{
+  "name": "autochecker",
+  "version": "1.0.0",
+  "description": "Antispam checkbox tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm i && webpack && rm -rf node_modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ScaredIbis/autochecker.git"
+  },
+  "author": "Chris Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScaredIbis/autochecker/issues"
+  },
+  "homepage": "https://github.com/ScaredIbis/autochecker#readme",
+  "dependencies": {
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8"
+  }
+}
