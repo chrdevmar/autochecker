@@ -14,7 +14,7 @@ setTimeout(function(){
       labelText = checkbox.labels[0].innerText
     } else {
       // search sibling elements
-      
+
     }
 
 
@@ -59,21 +59,21 @@ function determineOperation(text){
   );
   var action = '';
   var category = '';
-  if(isTermsAndConditions(text)){
-    action = 'checked';
-    category = 'terms and conditions';
+  if(isMarketingRelated(text)){
+    action = 'unchecked';
+    category = 'marketing';
     if(isOptOut){
-      action = 'unchecked';
+      action = 'checked';
     }
     return {
       action: action,
       category: category
     }
-  } else if(isMarketingRelated(text)) {
-    action = 'unchecked';
-    category = 'marketing';
+  } else if(isTermsAndConditions(text)) {
+    action = 'checked';
+    category = 'terms and conditions';
     if(isOptOut){
-      action = 'checked';
+      action = 'unchecked';
     }
     return {
       action: action,
@@ -88,14 +88,16 @@ function determineOperation(text){
 }
 
 function isTermsAndConditions(text){
-  return text.includes('agree') ||
-    text.includes('terms') ||
-    text.includes('policy')
+  return text.includes('terms') ||
+    text.includes('policy') ||
+    text.includes('privacy')
 }
 
 function isMarketingRelated(text){
   return text.includes('marketing') ||
   text.includes('receive') ||
   text.includes('send me') ||
-  text.includes('email')
+  text.includes('email') ||
+  text.includes('news') ||
+  text.includes('updates') ||
 }

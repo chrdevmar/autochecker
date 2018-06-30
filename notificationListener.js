@@ -8,7 +8,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse){
     chrome.storage.sync.set({[sender.url]: request.operations})
     setTimeout(function(){
       chrome.storage.sync.remove(sender.url)
-    }, 120000)
+    }, 300000)
   })
 })
 

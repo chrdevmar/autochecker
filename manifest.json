@@ -1,7 +1,7 @@
 {
-  "name": "Autochecker",
-  "version": "0.1",
-  "description": "Automatically check/uncheck form inputs. Autochecker will categorise the text associated with checkboxes found on the page and attempt to avoid marketing spam while accepting terms and conditions automatically.",
+  "name": "Autochecker Checkbox Manager",
+  "version": "0.1.4",
+  "description": "Autochecker will analyze checkboxes on the page, attempting to avoid marketing spam and automatically accept terms and conditions.",
   "manifest_version": 2,
   "permissions": [
     "activeTab",

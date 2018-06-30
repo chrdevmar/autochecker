@@ -1,13 +1,20 @@
 function generateHeader(operations){
+  operations = operations || [];
   var container = document.getElementById('autochecker-results');
   var headerElement = document.createElement('h3');
-  var headerText = document.createTextNode(operations.length+' checkboxes detected on this page.');
+  var headerText;
+  if(operations.length === 1){
+    headerText = document.createTextNode('1 checkbox detected on this page.');
+  } else {
+    headerText = document.createTextNode(operations.length+' checkboxes detected on this page.');
+  }
   headerElement.appendChild(headerText)
   headerElement.appendChild(document.createElement('hr'))
   container.appendChild(headerElement)
 }
 
 function generateCheckboxInfo(operations){
+  operations = operations || [];
   var container = document.getElementById('autochecker-results');
   if(operations.length){
     operations.forEach(function(operation){
@@ -26,7 +33,7 @@ function generateCheckboxInfo(operations){
       container.appendChild(labelTextElement);
       // now add the message from auto-checker
       var infoElement = document.createElement('p');
-      var infoText = document.createTextNode('this text was identified as '+operation.category+'. The checkbox has been '+operation.action);
+      var infoText = document.createTextNode('The above text was identified as '+operation.category+'. The checkbox has been '+operation.action);
       infoElement.appendChild(infoText)
       container.appendChild(infoElement);
       container.appendChild(document.createElement('hr'))
