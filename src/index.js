@@ -102,6 +102,11 @@ function isMarketingRelated(text){
   text.includes('send me') ||
   text.includes('Send me') ||
   text.includes('email') ||
+  text.includes('Email') ||
+  text.includes('sms') ||
+  text.includes('SMS') ||
   text.includes('news') ||
+  text.includes('News') ||
+  text.includes('Updates') ||
   text.includes('updates')
 }
