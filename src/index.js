@@ -7,17 +7,11 @@ returns an object structured like so:
   category: ('marketing', 'terms and conditions', 'unknown')
 }
 */
-const isTermsAndConditions = text => text.includes('terms') || text.includes('policy') || text.includes('privacy');
+const conditions = ['terms', 'policy', 'prvacy'];
+const marketing = ['marketing', 'receive', 'send me', 'email', 'sms', 'news', 'updates'];
 
-const isMarketingRelated = text => (
-  text.includes('marketing')
-  || text.includes('receive')
-  || text.includes('send me')
-  || text.includes('email')
-  || text.includes('sms')
-  || text.includes('news')
-  || text.includes('updates')
-);
+const isTermsAndConditions = text => typeof text === 'string' && conditions.some(term => text.includes(term));
+const isMarketingRelated = text => typeof text === 'string' && marketing.some(term => text.includes(term));
 
 const determineOperation = (text) => {
   // try to determine if the text is opt-out
@@ -68,7 +62,7 @@ setTimeout(() => {
         labelText = label.innerText;
       }
     }
-  
+
     const operation = determineOperation(labelText.toLowerCase());
 
     if (operation.action === 'checked') {
@@ -90,3 +84,5 @@ setTimeout(() => {
     operations,
   });
 }, 2500);
+
+export { isTermsAndConditions, isMarketingRelated, determineOperation };
