@@ -7,27 +7,22 @@ returns an object structured like so:
   category: ('marketing', 'terms and conditions', 'unknown')
 }
 */
-function isTermsAndConditions(text) {
-  return text.includes('terms')
-  || text.includes('policy')
-  || text.includes('privacy');
-}
+const isTermsAndConditions = text => text.includes('terms') || text.includes('policy') || text.includes('privacy');
 
-function isMarketingRelated(text) {
-  return text.includes('marketing')
+const isMarketingRelated = text => (
+  text.includes('marketing')
   || text.includes('receive')
   || text.includes('send me')
   || text.includes('email')
   || text.includes('sms')
   || text.includes('news')
-  || text.includes('updates');
-}
+  || text.includes('updates')
+);
 
-function determineOperation(text) {
+const determineOperation = (text) => {
   // try to determine if the text is opt-out
   const isOptOut = (
-    text.includes('do not') ||
-    text.includes('don\'t')
+    text.includes('do not') || text.includes('don\'t')
   );
   let action = '';
   let category = '';
@@ -37,10 +32,7 @@ function determineOperation(text) {
     if (isOptOut) {
       action = 'checked';
     }
-    return {
-      action,
-      category,
-    };
+    return { action, category };
   }
   if (isTermsAndConditions(text)) {
     action = 'checked';
@@ -48,16 +40,13 @@ function determineOperation(text) {
     if (isOptOut) {
       action = 'unchecked';
     }
-    return {
-      action,
-      category,
-    };
+    return { action, category };
   }
   return {
     action: 'ignored',
     category: 'unrelated/unknown',
   };
-}
+};
 
 setTimeout(() => {
   const operations = [];
@@ -93,7 +82,7 @@ setTimeout(() => {
       action: operation.action,
       category: operation.category,
     });
-  })
+  });
 
   chrome.runtime.sendMessage({
     operations,
