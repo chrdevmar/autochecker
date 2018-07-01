@@ -9,30 +9,32 @@ returns an object structured like so:
 */
 const conditions = ['terms', 'policy', 'prvacy'];
 const marketing = ['marketing', 'receive', 'send me', 'email', 'sms', 'news', 'updates'];
+const optOut = ['do not', 'don\'t'];
 
 const isTermsAndConditions = text => typeof text === 'string' && conditions.some(term => text.includes(term));
 const isMarketingRelated = text => typeof text === 'string' && marketing.some(term => text.includes(term));
+const isOptOut = text => typeof text === 'string' && optOut.some(term => text.includes(term));
 
 const determineOperation = (text) => {
-  // try to determine if the text is opt-out
-  const isOptOut = (
-    text.includes('do not') || text.includes('don\'t')
-  );
+  if (typeof text !== 'string') {
+    return null;
+  }
+
   let action = '';
   let category = '';
-  if (isMarketingRelated(text)) {
-    action = 'unchecked';
-    category = 'marketing';
-    if (isOptOut) {
-      action = 'checked';
-    }
-    return { action, category };
-  }
   if (isTermsAndConditions(text)) {
     action = 'checked';
     category = 'terms and conditions';
-    if (isOptOut) {
+    if (isOptOut(text)) {
       action = 'unchecked';
+    }
+    return { action, category };
+  }
+  if (isMarketingRelated(text)) {
+    action = 'unchecked';
+    category = 'marketing';
+    if (isOptOut(text)) {
+      action = 'checked';
     }
     return { action, category };
   }
@@ -85,4 +87,4 @@ setTimeout(() => {
   });
 }, 2500);
 
-export { isTermsAndConditions, isMarketingRelated, determineOperation };
+export { isTermsAndConditions, isMarketingRelated, isOptOut, determineOperation };
