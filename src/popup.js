@@ -31,7 +31,8 @@ const generateCheckboxInfo = (operations = []) => {
       container.appendChild(labelTextElement);
       // now add the message from auto-checker
       const infoElement = document.createElement('p');
-      const infoText = document.createTextNode(`The above text was identified as ${operation.category}. The checkbox has been ${operation.action}.`);
+      const infoText = document.createTextNode(`The above text was identified as ${operation.category}. \
+The checkbox has been ${operation.action}.`);
       infoElement.appendChild(infoText);
       container.appendChild(infoElement);
       container.appendChild(document.createElement('hr'));

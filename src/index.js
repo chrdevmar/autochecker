@@ -68,12 +68,14 @@ setTimeout(() => {
         labelText = label.innerText;
       }
     }
-
+  
     const operation = determineOperation(labelText.toLowerCase());
 
     if (operation.action === 'checked') {
+      // eslint-disable-next-line no-param-reassign
       checkbox.checked = true;
     } else if (operation.action === 'unchecked') {
+      // eslint-disable-next-line no-param-reassign
       checkbox.checked = false;
     }
     operations.push({
