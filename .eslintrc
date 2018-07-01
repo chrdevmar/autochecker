@@ -9,11 +9,13 @@
     "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     "max-len": ["error", 140],
     "object-curly-newline": 0,
-
     "linebreak-style": ["error", "windows"],
     "no-unused-expressions": ["error", { "allowShortCircuit": true }]
-    },
-    "env": {
-      "browser": true
-    }
+  },
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "chrome": true
+  }
 }

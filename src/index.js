@@ -26,8 +26,8 @@ function isMarketingRelated(text) {
 function determineOperation(text) {
   // try to determine if the text is opt-out
   const isOptOut = (
-    text.includes('do not') ||
-    text.includes('don\'t')
+    text.includes('do not')
+    || text.includes('don\'t')
   );
   let action = '';
   let category = '';
@@ -83,8 +83,10 @@ setTimeout(() => {
     const operation = determineOperation(labelText.toLowerCase());
 
     if (operation.action === 'checked') {
+      // eslint-disable-next-line no-param-reassign
       checkbox.checked = true;
     } else if (operation.action === 'unchecked') {
+      // eslint-disable-next-line no-param-reassign
       checkbox.checked = false;
     }
     operations.push({
@@ -93,7 +95,7 @@ setTimeout(() => {
       action: operation.action,
       category: operation.category,
     });
-  })
+  });
 
   chrome.runtime.sendMessage({
     operations,
