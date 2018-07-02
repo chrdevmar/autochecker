@@ -1,4 +1,4 @@
-function generateHeader(operations = []) {
+const generateHeader = (operations = []) => {
   const container = document.getElementById('autochecker-results');
   const headerElement = document.createElement('h3');
   let headerText;
@@ -10,9 +10,9 @@ function generateHeader(operations = []) {
   headerElement.appendChild(headerText);
   headerElement.appendChild(document.createElement('hr'));
   container.appendChild(headerElement);
-}
+};
 
-function generateCheckboxInfo(operations = []) {
+const generateCheckboxInfo = (operations = []) => {
   const container = document.getElementById('autochecker-results');
   if (operations.length) {
     operations.forEach((operation) => {
@@ -43,7 +43,7 @@ The checkbox has been ${operation.action}.`);
     infoContainer.appendChild(infoText);
     container.appendChild(infoContainer);
   }
-}
+};
 
 chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
   const { url } = tabs[0];

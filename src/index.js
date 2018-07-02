@@ -1,3 +1,11 @@
+const conditions = ['terms', 'policy', 'prvacy'];
+const marketing = ['marketing', 'receive', 'send me', 'email', 'sms', 'news', 'updates'];
+const optOut = ['do not', 'don\'t'];
+
+const isTermsAndConditions = text => typeof text === 'string' && conditions.some(term => text.includes(term));
+const isMarketingRelated = text => typeof text === 'string' && marketing.some(term => text.includes(term));
+const isOptOut = text => typeof text === 'string' && optOut.some(term => text.includes(term));
+
 /*
 recieves label text and attempts to decide whether checkbox
 should be checked or unchecked, as well as what category the checkbox is
@@ -7,57 +15,34 @@ returns an object structured like so:
   category: ('marketing', 'terms and conditions', 'unknown')
 }
 */
-function isTermsAndConditions(text) {
-  return text.includes('terms')
-  || text.includes('policy')
-  || text.includes('privacy');
-}
+const determineOperation = (text) => {
+  if (typeof text !== 'string') {
+    return null;
+  }
 
-function isMarketingRelated(text) {
-  return text.includes('marketing')
-  || text.includes('receive')
-  || text.includes('send me')
-  || text.includes('email')
-  || text.includes('sms')
-  || text.includes('news')
-  || text.includes('updates');
-}
-
-function determineOperation(text) {
-  // try to determine if the text is opt-out
-  const isOptOut = (
-    text.includes('do not')
-    || text.includes('don\'t')
-  );
   let action = '';
   let category = '';
-  if (isMarketingRelated(text)) {
-    action = 'unchecked';
-    category = 'marketing';
-    if (isOptOut) {
-      action = 'checked';
-    }
-    return {
-      action,
-      category,
-    };
-  }
   if (isTermsAndConditions(text)) {
     action = 'checked';
     category = 'terms and conditions';
-    if (isOptOut) {
+    if (isOptOut(text)) {
       action = 'unchecked';
     }
-    return {
-      action,
-      category,
-    };
+    return { action, category };
+  }
+  if (isMarketingRelated(text)) {
+    action = 'unchecked';
+    category = 'marketing';
+    if (isOptOut(text)) {
+      action = 'checked';
+    }
+    return { action, category };
   }
   return {
     action: 'ignored',
     category: 'unrelated/unknown',
   };
-}
+};
 
 setTimeout(() => {
   const operations = [];
@@ -101,3 +86,5 @@ setTimeout(() => {
     operations,
   });
 }, 2500);
+
+export { isTermsAndConditions, isMarketingRelated, isOptOut, determineOperation };

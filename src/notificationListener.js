@@ -1,5 +1,5 @@
 chrome.runtime.onMessage.addListener((request, sender) => {
-  chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+  chrome.tabs.query({active: true, lastFocusedWindow: true }, (tabs) => {
     chrome.browserAction.setBadgeText({
       text: request.operations.length.toString(),
       tabId: tabs[0].id,
