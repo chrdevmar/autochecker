@@ -1,3 +1,11 @@
+const conditions = ['terms', 'policy', 'prvacy'];
+const marketing = ['marketing', 'receive', 'send me', 'email', 'sms', 'news', 'updates'];
+const optOut = ['do not', 'don\'t'];
+
+const isTermsAndConditions = text => typeof text === 'string' && conditions.some(term => text.includes(term));
+const isMarketingRelated = text => typeof text === 'string' && marketing.some(term => text.includes(term));
+const isOptOut = text => typeof text === 'string' && optOut.some(term => text.includes(term));
+
 /*
 recieves label text and attempts to decide whether checkbox
 should be checked or unchecked, as well as what category the checkbox is
@@ -7,14 +15,6 @@ returns an object structured like so:
   category: ('marketing', 'terms and conditions', 'unknown')
 }
 */
-const conditions = ['terms', 'policy', 'prvacy'];
-const marketing = ['marketing', 'receive', 'send me', 'email', 'sms', 'news', 'updates'];
-const optOut = ['do not', 'don\'t'];
-
-const isTermsAndConditions = text => typeof text === 'string' && conditions.some(term => text.includes(term));
-const isMarketingRelated = text => typeof text === 'string' && marketing.some(term => text.includes(term));
-const isOptOut = text => typeof text === 'string' && optOut.some(term => text.includes(term));
-
 const determineOperation = (text) => {
   if (typeof text !== 'string') {
     return null;
