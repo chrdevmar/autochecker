@@ -1,7 +1,7 @@
 {
   "name": "Autochecker Antispam & Checkbox Tool",
   "short_name": "Autochecker Checkbox Tool",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Autochecker attempts to avoid marketing spam and automatically accepts terms and conditions when filling out forms.",
   "manifest_version": 2,
   "permissions": [

@@ -1,3 +1,6 @@
+/* global test, expect */
+/* eslint no-unused-expressions: 0 */
+
 import {
   isTermsAndConditions,
   isMarketingRelated,
@@ -10,6 +13,9 @@ test('Should detect terms-and-conditions related terms', () => {
   expect(isTermsAndConditions('test-policy')).toBeTruthy;
   expect(isTermsAndConditions('test-privacy')).toBeTruthy;
   expect(isTermsAndConditions('test-123')).toBeFalsy;
+  expect(isTermsAndConditions('agree to receive marketing emails')).toBeFalsy;
+  expect(isTermsAndConditions('sign me up to receive')).toBeFalsy;
+  expect(isTermsAndConditions('special offers')).toBeFalsy;
   expect(isTermsAndConditions(123)).toBeFalsy;
   expect(isTermsAndConditions(['terms'])).toBeFalsy;
 });
@@ -23,6 +29,8 @@ test('Should detect marketing related terms', () => {
   expect(isMarketingRelated('test-news')).toBeTruthy;
   expect(isMarketingRelated('test-updates')).toBeTruthy;
   expect(isMarketingRelated('test-123')).toBeFalsy;
+  expect(isMarketingRelated('I agree to the terms and conditions')).toBeFalsy;
+  expect(isMarketingRelated('I have read the privacy policy')).toBeFalsy;
   expect(isMarketingRelated(123)).toBeFalsy;
   expect(isMarketingRelated(['terms'])).toBeFalsy;
 });
